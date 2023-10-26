@@ -19,7 +19,7 @@ jobs:
       alist:
         image: ykxvk8yl5l/alist-encrypt
         env:
-          DAV_PASSWORD: '123456'
+          DAV_PASSWORD: 'AW23831qEW' 
     steps:
       - uses: actions/checkout@v2
       - name: 'Create Config'
