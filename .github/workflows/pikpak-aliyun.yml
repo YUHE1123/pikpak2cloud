@@ -15,7 +15,7 @@ jobs:
       aliyun:
         image: messense/aliyundrive-webdav
         env:
-          REFRESH_TOKEN: '${{ secrets.ALIYUN_REFRESH_TOKEN }}'
+          REFRESH_TOKEN: '${{ secrets.ALIYUN_REFRESH_TOKEN }}' 
       alist:
         image: ykxvk8yl5l/alist-encrypt
         env:
@@ -33,7 +33,7 @@ jobs:
       - name: rclone
         uses: wei/rclone@v1
         env:
-          RCLONE_CONF: ${{ secrets.RCLONE_ALIYUN_CONF }}
+          RCLONE_CONF: ${{ secrets.RCLONE_CONF }} 
         with:
           args: copy ${{ github.event.inputs.path }} aliyun:/encrypt_folder
         
