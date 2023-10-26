@@ -10,7 +10,7 @@ on:
       Folder:
         description: '保存目录'
         required: true
-        default: 'encrypt_folder'
+        default: 'encrypt_folder' 
 
 jobs:
   Alist:
@@ -18,7 +18,7 @@ jobs:
     container: ubuntu
     services:
       alist:
-        image: xhofe/alist
+        image: xhofe/alist 
         env:
           ALIST_ADMIN_PASSWORD: 'admin'
         ports:
@@ -26,7 +26,7 @@ jobs:
       alist-encrypt:
         image: ykxvk8yl5l/alist-encrypt:dev
         env:
-          DAV_PASSWORD: '123456'
+          DAV_PASSWORD: 'AW23831qEW' 
           DAV_ENCNAME: true
           DAV_ENABLE_OTHER: false
         ports:
@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
-      - name: install prerequisites
+      - name: install prerequisites 
         run: |
           python -m pip install --upgrade pip wheel
           pip install install requests
@@ -52,12 +52,12 @@ jobs:
           aria2c --conf $GITHUB_WORKSPACE/aria2.conf --seed-time=0 -d downloads -c $downloadurl -o $filename
           dfilename=$(ls downloads | head -n1)
           echo "::set-output name=path::downloads/$filename"
-          echo "::set-output name=filename::$dfilename"
+          echo "::set-output name=filename::$dfilename" 
       - name: Upload
         id: upload
-        if: steps.downloading.outputs.filename != '' && !cancelled() && !failure()
+        if: steps.downloading.outputs.filename != '' && !cancelled() && !failure() 
         run: |
-          python alist.py --fileName="${{ steps.downloading.outputs.filename }}"  --path="${{ steps.downloading.outputs.path }}" --storage_body="${{ secrets.ALIST_STORAGE_BODY }}"
+          python alist.py --fileName="${{ steps.downloading.outputs.filename }}"  --path="${{ steps.downloading.outputs.path }}" --storage_body="${{ secrets.ALIST_STORAGE_BODY }}" 
 #       - name: rclone
 #         uses: wei/rclone@v1
 #         if: steps.downloading.outputs.filename != '' && !cancelled() && !failure()
@@ -67,15 +67,15 @@ jobs:
 #           args: copy ${{ steps.downloading.outputs.path }} alist:/encrypt_folder
           
       - name: Download another
-        uses: benc-uk/workflow-dispatch@v1
-        if: steps.downloading.outputs.filename != '' && !cancelled() && !failure()
+        uses: benc-uk/workflow-dispatch@v1 
+        if: steps.downloading.outputs.filename != '' && !cancelled() && !failure() 
         with:
           workflow: 通过Alist上传
           token: ${{ secrets.TOKEN }}
           ref: main    
           
       - name: Delete workflow runs
-        uses: Mattraks/delete-workflow-runs@v1.2.3
+        uses: Mattraks/delete-workflow-runs@v1.2.3 
         with:
           token: ${{ github.token }}
           repository: ${{ github.repository }}
